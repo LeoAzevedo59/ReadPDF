@@ -43,14 +43,19 @@ foreach (var row in rows)
   {
     for (int i = 0; i < concentrations.Length; i++)
     {
-      productCompositionList.Add(new()
+      try
       {
-        Product = productId,
-        Concentration = concentrations[i].Trim(),
-        Ingredient = Ingredients[i].Trim()
-      });
+        productCompositionList.Add(new()
+        {
+          Product = productId,
+          Concentration = concentrations[i].Trim(),
+          Ingredient = Ingredients[i].Trim()
+        });
+      }
+      catch (Exception)
+      {
+        Console.WriteLine($"Error: {JsonConvert.SerializeObject(row)}");
+      }
     }
   }
 }
-
-var x = 1;

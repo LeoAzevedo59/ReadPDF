@@ -46,6 +46,11 @@ namespace Adapar.src
                       content += item.Text;
                     }
 
+                    if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(content.Trim()))
+                    {
+                      break;
+                    }
+
                     if (content.Contains("Restrição", StringComparison.CurrentCultureIgnoreCase) ||
                         content.Contains("Restrições", StringComparison.CurrentCultureIgnoreCase))
                     {
@@ -138,9 +143,10 @@ namespace Adapar.src
       foreach (char letter in word)
       {
         if (char.IsLower(letter))
+        {
           return true;
+        }
       }
-
 
       return false;
     }
