@@ -43,7 +43,14 @@ namespace Adapar.src
 
     public static void RemoveFile()
     {
+      int maxPagesPerPage = Constantes.MAX_PAGES_PER_FILE;
+      int totalPages = (CountTotalPages() / maxPagesPerPage) + 2;
 
+      for (int fileCounter = 1; fileCounter < totalPages; fileCounter++)
+      {
+        string path = $"{Constantes.PATH_OUTPUT}{fileCounter}.pdf";
+        File.Delete(path);
+      }
     }
     public static int CountTotalPages()
     {
