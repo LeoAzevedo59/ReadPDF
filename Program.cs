@@ -38,7 +38,12 @@ foreach (var row in rows)
   });
 
   if (string.IsNullOrEmpty(row.ConcIa) || string.IsNullOrEmpty(row.IngredienteAtivo))
-    Console.WriteLine($"Error: {JsonConvert.SerializeObject(row)}");
+  {
+    string json = JsonConvert.SerializeObject(row);
+    Console.WriteLine($"Error: {json}");
+
+    File.AppendAllText($"{Constantes.PATH_LOG}", json + Environment.NewLine);
+  }
   else
   {
     for (int i = 0; i < concentrations.Length; i++)
@@ -54,7 +59,10 @@ foreach (var row in rows)
       }
       catch (Exception)
       {
-        Console.WriteLine($"Error: {JsonConvert.SerializeObject(row)}");
+        string json = JsonConvert.SerializeObject(row);
+        Console.WriteLine($"Error: {json}");
+
+        File.AppendAllText($"{Constantes.PATH_LOG}", json + Environment.NewLine);
       }
     }
   }

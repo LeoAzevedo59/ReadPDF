@@ -16,7 +16,7 @@ namespace Adapar.src
 
       for (int fileCounter = 1; fileCounter < totalPages; fileCounter++)
       {
-        Console.WriteLine($"Page: {fileCounter}");
+        Console.WriteLine($"File: {fileCounter}/{Pages.CountTotalPages() / maxPagesPerPage}");
 
         string path = $"{Constantes.PATH_OUTPUT}{fileCounter}.pdf";
 
