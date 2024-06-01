@@ -9,6 +9,7 @@
       "Adapar/1.0.0": {
         "dependencies": {
           "Aspose.PDF": "24.5.1",
+          "iTextSharp": "5.5.13.3",
           "itext7": "8.0.4"
         },
         "runtime": {
@@ -31,6 +32,14 @@
           "lib/net8.0/Aspose.PDF.dll": {
             "assemblyVersion": "24.5.1.0",
             "fileVersion": "24.5.1.0"
+          }
+        }
+      },
+      "BouncyCastle/1.8.9": {
+        "runtime": {
+          "lib/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.8.9.0",
+            "fileVersion": "1.8.20343.1"
           }
         }
       },
@@ -114,6 +123,17 @@
       "itext7/8.0.4": {
         "dependencies": {
           "itext": "8.0.4"
+        }
+      },
+      "iTextSharp/5.5.13.3": {
+        "dependencies": {
+          "BouncyCastle": "1.8.9"
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {
+            "assemblyVersion": "5.5.13.3",
+            "fileVersion": "0.0.0.0"
+          }
         }
       },
       "Microsoft.DotNet.PlatformAbstractions/1.1.0": {
@@ -808,6 +828,13 @@
       "path": "aspose.pdf/24.5.1",
       "hashPath": "aspose.pdf.24.5.1.nupkg.sha512"
     },
+    "BouncyCastle/1.8.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-axnBgvdD5n+FnEG6efk/tfKuMFru7R/EoISH9zjh319yb3HD24TEHSAbNN/lTRT2ulOGRxDgOsCjkuk08iwWPg==",
+      "path": "bouncycastle/1.8.9",
+      "hashPath": "bouncycastle.1.8.9.nupkg.sha512"
+    },
     "itext/8.0.4": {
       "type": "package",
       "serviceable": true,
@@ -828,6 +855,13 @@
       "sha512": "sha512-J+eaLBqCSXbk4DPGuuKZPcs02cH7De6xGZ312o87d21MNgSmAQQikDVw5OpcdMiA0GW/YT/VXRjU5cLPa6sh9A==",
       "path": "itext7/8.0.4",
       "hashPath": "itext7.8.0.4.nupkg.sha512"
+    },
+    "iTextSharp/5.5.13.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vtnMhTEJdZFCkLqaQLjD8aqTBIVKHPrSFuSXnxbLEJlvE/j/l88fvG9wtsejXTmhtErMo0lA9T2LdfdfbwplYw==",
+      "path": "itextsharp/5.5.13.3",
+      "hashPath": "itextsharp.5.5.13.3.nupkg.sha512"
     },
     "Microsoft.DotNet.PlatformAbstractions/1.1.0": {
       "type": "package",

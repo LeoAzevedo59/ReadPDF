@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Adapar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2729e81f013444e1bd440b835e49832918b5c7e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0db4e6d28ab9186a5a6108faef2b58b8cce3934")]
 [assembly: System.Reflection.AssemblyProductAttribute("Adapar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Adapar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
