@@ -58,7 +58,7 @@ namespace Adapar.src
                       colIndex = 1;
                       continue;
                     }
-                    else if (content.Length >= 49 && colIndex == 1)
+                    else if (colIndex == 1 && WordIsLowCase(content))
                     {
                       int lastItem = Columns.Count - 1;
                       var lastRow = Columns[lastItem];
@@ -117,8 +117,6 @@ namespace Adapar.src
 
                 int lastItem_test = Columns.Count - 1;
                 var lastRow_test = Columns[lastItem_test];
-
-                Console.WriteLine("Fish Obj");
               }
             }
           }
@@ -130,6 +128,21 @@ namespace Adapar.src
         }
       }
       return Columns;
+    }
+
+    public static bool WordIsLowCase(string word)
+    {
+      if (word.Length < 20)
+        return false;
+
+      foreach (char letter in word)
+      {
+        if (char.IsLower(letter))
+          return true;
+      }
+
+
+      return false;
     }
   }
 }
