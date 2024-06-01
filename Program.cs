@@ -1,4 +1,5 @@
 ﻿using Adapar;
+using Adapar.src;
 using Aspose.Pdf;
 using Aspose.Pdf.Text;
 
@@ -9,79 +10,116 @@ var column = new Column();
 int colIndex = 1;
 
 var document = new Document(path);
+var x = document.Pages[5].Number;
 
-foreach (Page page in document.Pages)
+
+try
 {
-  TableAbsorber absorber = new();
-  absorber.Visit(page);
-
-  foreach (AbsorbedTable table in absorber.TableList)
+  foreach (Page page in document.Pages)
   {
-    foreach (AbsorbedRow row in table.RowList)
+    var pageNumber = page.Number;
+
+    TableAbsorber absorber = new();
+    absorber.Visit(page);
+
+    foreach (AbsorbedTable table in absorber.TableList)
     {
-      foreach (AbsorbedCell cell in row.CellList)
+      foreach (AbsorbedRow row in table.RowList)
       {
-
-        string content = string.Empty;
-
-        foreach (var item in cell.TextFragments)
+        foreach (AbsorbedCell cell in row.CellList)
         {
-          content += item.Text;
+          try
+          {
+            string content = string.Empty;
+
+            foreach (var item in cell.TextFragments)
+            {
+              content += item.Text;
+            }
+
+            Console.WriteLine(content);
+
+            if (content.Contains("Restrição") ||
+                content.Contains("Restrições"))
+            {
+              int lastItem = Columns.Count - 1;
+              var lastRow = Columns[lastItem];
+
+              lastRow.Restricao = content;
+
+              column = new();
+              colIndex = 1;
+              continue;
+            }
+            else if (content.Length >= 48)
+            {
+              int lastItem = Columns.Count - 1;
+              var lastRow = Columns[lastItem];
+
+              lastRow.Restricao += $" {content}";
+
+              column = new();
+              colIndex = 1;
+              continue;
+            }
+
+            content = content.Trim();
+
+            switch (colIndex)
+            {
+              case (int)ColumnEnum.MarcaComercial:
+                column.MarcaComercial = content;
+                break;
+              case (int)ColumnEnum.ClasseDeUso:
+                column.ClasseDeUso = content;
+                break;
+              case (int)ColumnEnum.Unid:
+                column.Unid = content;
+                break;
+              case (int)ColumnEnum.ConcIa:
+                column.ConcIa = content;
+                break;
+              case (int)ColumnEnum.Registro:
+                column.Registro = content;
+                break;
+              case (int)ColumnEnum.EmpresaRegistrante:
+                column.EmpresaRegistrante = content;
+                break;
+              case (int)ColumnEnum.ClasseToxicologica:
+                column.ClasseToxicologica = content;
+                break;
+              case (int)ColumnEnum.IngredienteAtivo:
+                column.IngredienteAtivo = content;
+                Columns.Add(column);
+                column = new();
+                colIndex = 0;
+                break;
+              default:
+                break;
+            }
+
+            colIndex++;
+          }
+          catch (Exception ex)
+          {
+            Console.WriteLine(ex.Message);
+            throw;
+          }
         }
 
-        Console.WriteLine(content);
+        int lastItem_test = Columns.Count - 1;
+        var lastRow_test = Columns[lastItem_test];
 
-        if (content.Contains("Restrição"))
-        {
-          int lastItem = Columns.Count - 1;
-          var lastRow = Columns[lastItem];
+        if (lastRow_test.MarcaComercial.Equals("ACTELLICLAMBDA"))
+          Console.WriteLine("tt");
 
-          lastRow.Restricao = content;
-
-          column = new();
-          colIndex = 1;
-          continue;
-        }
-
-        content = content.Trim();
-
-        switch (colIndex)
-        {
-          case 1:
-            column.MarcaComercial = content;
-            break;
-          case 2:
-            column.ClasseDeUso = content;
-            break;
-          case 3:
-            column.Unid = content;
-            break;
-          case 4:
-            column.ConcIa = content;
-            break;
-          case 5:
-            column.Registro = content;
-            break;
-          case 6:
-            column.EmpresaRegistrante = content;
-            break;
-          case 7:
-            column.ClasseToxicologica = content;
-            break;
-          case 8:
-            column.IngredienteAtivo = content;
-            Columns.Add(column);
-            column = new();
-            colIndex = 1;
-            break;
-          default:
-            break;
-        }
-
-        colIndex++;
+        Console.WriteLine("FINISH_OBJ");
       }
-
-      Console.WriteLine("FINISH_OBJ");
     }
   }
+}
+catch (Exception ex)
+{
+  System.Console.WriteLine(ex.Message);
+  throw;
 }
