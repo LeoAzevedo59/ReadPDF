@@ -11,14 +11,14 @@ namespace Adapar.src
       var column = new Column();
       int colIndex = 1;
 
-      int maxPagesPerPage = 4;
+      int maxPagesPerPage = Constantes.MAX_PAGES_PER_FILE;
       int totalPages = (Pages.CountTotalPages() / maxPagesPerPage) + 2;
 
       for (int fileCounter = 1; fileCounter < totalPages; fileCounter++)
       {
         Console.WriteLine($"Page: {fileCounter}");
 
-        string path = $"src/Pdfs/output-{fileCounter}.pdf";
+        string path = $"{Constantes.PATH_OUTPUT}{fileCounter}.pdf";
 
         var document = new Document(path);
 

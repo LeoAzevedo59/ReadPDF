@@ -7,11 +7,11 @@ namespace Adapar.src
 
   public class Pages
   {
-    const string pathInput = "./src/Pdfs/adapar-24-05-2024.pdf";
+    const string pathInput = Constantes.PATH_ORIGIN;
 
     public static void Separate()
     {
-      int maxPagesPerPage = 4;
+      int maxPagesPerPage = Constantes.MAX_PAGES_PER_FILE;
 
       PdfReader reader = new(pathInput);
       int totalPages = reader.NumberOfPages;
@@ -20,7 +20,7 @@ namespace Adapar.src
 
       for (int startPage = 1; startPage <= totalPages; startPage += maxPagesPerPage)
       {
-        string outputPdf = $"src/Pdfs/output-{fileCounter}.pdf";
+        string outputPdf = $"{Constantes.PATH_OUTPUT}{fileCounter}.pdf";
 
         using (FileStream fs = new(outputPdf, FileMode.Create, FileAccess.Write))
         {
@@ -41,6 +41,10 @@ namespace Adapar.src
       }
     }
 
+    public static void RemoveFile()
+    {
+
+    }
     public static int CountTotalPages()
     {
       PdfReader reader = new(pathInput);
