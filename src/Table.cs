@@ -5,7 +5,7 @@ namespace Adapar.src
 {
   public class Table
   {
-    public static void Separate()
+    public static List<Column> Separate()
     {
       var Columns = new List<Column>();
       var column = new Column();
@@ -46,8 +46,8 @@ namespace Adapar.src
                       content += item.Text;
                     }
 
-                    if (content.Contains("Restrição") ||
-                        content.Contains("Restrições"))
+                    if (content.Contains("Restrição", StringComparison.CurrentCultureIgnoreCase) ||
+                        content.Contains("Restrições", StringComparison.CurrentCultureIgnoreCase))
                     {
                       int lastItem = Columns.Count - 1;
                       var lastRow = Columns[lastItem];
@@ -58,12 +58,13 @@ namespace Adapar.src
                       colIndex = 1;
                       continue;
                     }
-                    else if (content.Length >= 48)
+                    else if (content.Length >= 49 && colIndex == 1)
                     {
                       int lastItem = Columns.Count - 1;
                       var lastRow = Columns[lastItem];
 
                       lastRow.Restricao += $" {content}";
+                      lastRow.Restricao = lastRow.Restricao.Trim();
 
                       column = new();
                       colIndex = 1;
@@ -128,7 +129,7 @@ namespace Adapar.src
           throw;
         }
       }
-      Console.WriteLine("Fish page");
+      return Columns;
     }
   }
 }
