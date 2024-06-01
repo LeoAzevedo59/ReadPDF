@@ -1,1 +1,24 @@
-bin
+# Arquivos e pastas gerados pelo Visual Studio
+.vs/
+bin/
+obj/
+
+# Arquivos de compilação
+*.exe
+*.dll
+*.pdb
+*.dll.config
+*.exe.config
+
+# Arquivos de publicação
+publish/
+
+# Arquivos temporários
+*.user
+*.bak
+*.cache
+
+# Logs e arquivos de depuração
+*.log
+*.vspscc
+*.vssscc
