@@ -51,3 +51,4 @@
 /Users/leoazevedo/dev/Adapar/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Diagnostics.PerformanceCounter.dll
 /Users/leoazevedo/dev/Adapar/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll
 /Users/leoazevedo/dev/Adapar/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+/Users/leoazevedo/dev/Adapar/obj/Debug/net8.0/Adapar.sourcelink.json
