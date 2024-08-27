@@ -24,7 +24,7 @@ foreach (var row in rows)
   var concentrations = row.ConcIa.Split("+");
   var Ingredients = row.IngredienteAtivo.Split("+");
 
-  Guid productId = Guid.NewGuid();
+  int productId = products.Count + 1;
 
   products.Add(new()
   {
@@ -67,3 +67,9 @@ foreach (var row in rows)
     }
   }
 }
+
+DatabaseProductCompositionHandler dbCompositionHandler = new();
+DatabaseProductHandler dbProductHandler = new();
+
+dbProductHandler.InsertProducts(products);
+dbCompositionHandler.InsertProductCompositions(productCompositionList);
