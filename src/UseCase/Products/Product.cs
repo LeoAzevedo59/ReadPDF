@@ -8,10 +8,10 @@ namespace Adapar.src.UseCase.Products
     public int Id { get; set; }
     public string? Description { get; set; }
     public string? Category { get; set; }
-    public string? Unit { get; set; }
     public string? Code { get; set; }
     public string? Enterprise { get; set; }
     public string? ClassToxicological { get; set; }
+    public string? Restricao { get; set; }
   }
 
   public class DatabaseProductHandler
@@ -36,7 +36,6 @@ namespace Adapar.src.UseCase.Products
               command.Parameters.AddWithValue("@Id", product.Id);
               command.Parameters.AddWithValue("@Description", product.Description ?? (object)DBNull.Value);
               command.Parameters.AddWithValue("@Category", product.Category ?? (object)DBNull.Value);
-              command.Parameters.AddWithValue("@Unit", product.Unit ?? (object)DBNull.Value);
               command.Parameters.AddWithValue("@Code", product.Code ?? (object)DBNull.Value);
               command.Parameters.AddWithValue("@Enterprise", product.Enterprise ?? (object)DBNull.Value);
               command.Parameters.AddWithValue("@ClassToxicological", product.ClassToxicological ?? (object)DBNull.Value);

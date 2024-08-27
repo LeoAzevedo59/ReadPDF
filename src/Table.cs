@@ -13,17 +13,20 @@ namespace Adapar.src
 
       int maxPagesPerPage = Constantes.MAX_PAGES_PER_FILE;
       int totalPages = (Pages.CountTotalPages() / maxPagesPerPage) + 2;
-
-      for (int fileCounter = 1; fileCounter < totalPages; fileCounter++)
+      try
       {
-        Console.WriteLine($"File: {fileCounter}/{Pages.CountTotalPages() / maxPagesPerPage}");
-
-        string path = $"{Constantes.PATH_OUTPUT}{fileCounter}.pdf";
-
-        var document = new Document(path);
-
-        try
+        for (int fileCounter = 1; fileCounter < totalPages; fileCounter++)
         {
+          if (fileCounter > Pages.CountTotalPages())
+            continue;
+
+          Console.WriteLine($"File: {fileCounter}/{Pages.CountTotalPages() / maxPagesPerPage}");
+
+          string path = $"{Constantes.PATH_OUTPUT}{fileCounter}.pdf";
+
+          var document = new Document(path);
+
+
           foreach (Page page in document.Pages)
           {
             var pageNumber = page.Number;
@@ -43,12 +46,7 @@ namespace Adapar.src
 
                     foreach (var item in cell.TextFragments)
                     {
-                      content += item.Text;
-                    }
-
-                    if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(content.Trim()))
-                    {
-                      break;
+                      content += item.Text.Trim();
                     }
 
                     if (content.Contains("Restrição", StringComparison.CurrentCultureIgnoreCase) ||
@@ -63,7 +61,7 @@ namespace Adapar.src
                       colIndex = 1;
                       continue;
                     }
-                    else if (colIndex == 1 && WordIsLowCase(content))
+                    else if (colIndex == 1 && WordIsLowCase(content)) // é restrição
                     {
                       int lastItem = Columns.Count - 1;
                       var lastRow = Columns[lastItem];
@@ -76,33 +74,33 @@ namespace Adapar.src
                       continue;
                     }
 
-                    content = content.Trim();
+                    if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(content.Trim()))
+                      Console.WriteLine(content);
+                    else
+                      content = content.Trim();
 
                     switch (colIndex)
                     {
-                      case (int)ColumnEnum.MarcaComercial:
+                      case (int)ColumnEnum.Marca:
                         column.MarcaComercial = content;
                         break;
-                      case (int)ColumnEnum.ClasseDeUso:
+                      case (int)ColumnEnum.Classe:
                         column.ClasseDeUso = content;
                         break;
-                      case (int)ColumnEnum.Unid:
-                        column.Unid = content;
-                        break;
-                      case (int)ColumnEnum.ConcIa:
+                      case (int)ColumnEnum.Concentracao:
                         column.ConcIa = content;
                         break;
                       case (int)ColumnEnum.Registro:
                         column.Registro = content;
                         break;
-                      case (int)ColumnEnum.EmpresaRegistrante:
+                      case (int)ColumnEnum.Empresa:
                         column.EmpresaRegistrante = content;
-                        break;
-                      case (int)ColumnEnum.ClasseToxicologica:
-                        column.ClasseToxicologica = content;
                         break;
                       case (int)ColumnEnum.IngredienteAtivo:
                         column.IngredienteAtivo = content;
+                        break;
+                      case (int)ColumnEnum.ClasseToxicologica:
+                        column.ClasseToxicologica = content;
                         Columns.Add(column);
                         column = new();
                         colIndex = 0;
@@ -119,20 +117,18 @@ namespace Adapar.src
                     throw;
                   }
                 }
-
-                int lastItem_test = Columns.Count - 1;
-                var lastRow_test = Columns[lastItem_test];
               }
             }
           }
+
         }
-        catch (Exception ex)
-        {
-          Console.WriteLine(ex.Message);
-          throw;
-        }
+        return Columns;
       }
-      return Columns;
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw;
+      }
     }
 
     public static bool WordIsLowCase(string word)
